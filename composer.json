@@ -1,7 +1,6 @@
 {
 	"name": "ixolit/moreify-client-http-guzzle",
 	"license": "MIT",
-	"version": "1.0.0-beta1",
 	"support": {
 		"docs": "https://www.moreify.com/en/api",
 		"issues": "https://github.com/Ixolit/moreify-php-client/issues"
@@ -10,7 +9,7 @@
 		"ixolit/moreify-client-http": "1.0.0"
 	},
 	"require": {
-		"ixolit/moreify-client": "^1.0.0-beta1",
+		"ixolit/moreify-client": "^1.0.0",
 		"guzzlehttp/guzzle": "^6.2"
 	},
 	"autoload": {
@@ -22,5 +21,6 @@
 		"psr-4": {
 			"Ixolit\\Moreify\\HTTP\\Guzzle\\": "./tests"
 		}
-	}
+	},
+	"minimum-stability": "dev"
 }
