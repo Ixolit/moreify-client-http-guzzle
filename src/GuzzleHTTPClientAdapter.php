@@ -13,40 +13,45 @@ use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriInterface;
 
 class GuzzleHTTPClientAdapter implements HTTPClientAdapter {
-	/**
-	 * @return RequestInterface
-	 */
-	public function createRequest() {
-		return new Request('GET', '/');
-	}
+    private $client;
 
-	/**
-	 * @return UriInterface
-	 */
-	public function createUri() {
-		return new Uri();
-	}
+    public function __construct() {
+        $this->client = new Client();
+    }
 
-	/**
-	 * @param string $string
-	 *
-	 * @return StreamInterface
-	 */
-	public function createStringStream($string) {
-		return \GuzzleHttp\Psr7\stream_for($string);
-	}
+    /**
+     * @return RequestInterface
+     */
+    public function createRequest() {
+        return new Request('GET', '/');
+    }
 
-	/**
-	 * @param RequestInterface $request
-	 *
-	 * @return ResponseInterface
-	 */
-	public function send(RequestInterface $request) {
-		$client = new Client();
-		try {
-			return $client->send($request);
-		} catch (ClientException $e) {
-			return $e->getResponse();
-		}
-	}
+    /**
+     * @return UriInterface
+     */
+    public function createUri() {
+        return new Uri();
+    }
+
+    /**
+     * @param string $string
+     *
+     * @return StreamInterface
+     */
+    public function createStringStream($string) {
+        return \GuzzleHttp\Psr7\stream_for($string);
+    }
+
+    /**
+     * @param RequestInterface $request
+     *
+     * @return ResponseInterface
+     */
+    public function send(RequestInterface $request) {
+        try {
+            return $this->client->send($request);
+        } catch (ClientException $e) {
+            return $e->getResponse();
+        }
+    }
 }
